@@ -146,11 +146,12 @@
         },
         closeOnEscape: false,
         modal: true,
-        title: opts.dialogTitle
+        title: opts.dialogTitle,
+        open: function(event, ui) {
+            // hide the dialog's upper right corner "x" close button
+            $(this).closest('.ui-dialog').find('.ui-dialog-titlebar-close').hide();
+        }
       });
-
-      // hide the dialog's upper right corner "x" close button
-      $('.ui-dialog-titlebar-close').css('display', 'none');
 
       // start the countdown display
       countdownDisplay();
