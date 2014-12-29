@@ -40,6 +40,9 @@
       dialogDisplayLimit: 20,       // 20 seconds for testing. Time to display the warning dialog before logout (and optional callback) in seconds. 180 = 3 Minutes
       dialogTitle: 'Session Expiration Warning',
       dialogText: 'Because you have been inactive, your session is about to expire.',
+      dialogTimeRemaining: 'Time remaining',
+      dialogStayLoggedIn: 'Stay Logged In',
+      dialogLogOutNow: 'Log Out Now',
 
       // server-side session keep-alive timer
       sessionKeepAliveTimer: 600   // ping the server at this interval in seconds. 600 = 10 Minutes
@@ -132,18 +135,20 @@
       var dialogContent = "<div id='idletimer_warning_dialog'><p>" + opts.dialogText + "</p><p style='display:inline'>Time remaining: <div style='display:inline' id='countdownDisplay'></div></p></div>";
 
       $(dialogContent).dialog({
-        buttons: {
-          "Stay Logged In": function () {
-            console.log('Stay Logged In button clicked');
+        buttons: [{
+	  text: opts.dialogStayLoggedIn,
+          click: function () {
             destroyWarningDialog();
             stopDialogTimer();
             startIdleTimer();
-          },
-          "Log Out Now": function () {
-            console.log('Log Out Now button clicked');
+          }}
+          ,
+	  {
+	   text: opts.dialogLogOutNow,
+	   click: function () {
             logoutUser();
-          }
-        },
+          }}
+        ],
         closeOnEscape: false,
         modal: true,
         title: opts.dialogTitle,
@@ -152,7 +157,6 @@
             $(this).closest('.ui-dialog').find('.ui-dialog-titlebar-close').hide();
         }
       });
-
       // start the countdown display
       countdownDisplay();
 
