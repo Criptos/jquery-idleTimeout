@@ -43,6 +43,7 @@
       dialogTimeRemaining: 'Time remaining',
       dialogStayLoggedIn: 'Stay Logged In',
       dialogLogOutNow: 'Log Out Now',
+      dialogPrivateMode: 'Please disable "Private Mode", or upgrade to a modern browser. Or perhaps a dependent file missing. Please see: https://github.com/marcuswestin/store.js', 
 
       // server-side session keep-alive timer
       sessionKeepAliveTimer: 600   // ping the server at this interval in seconds. 600 = 10 Minutes
@@ -292,7 +293,7 @@
         store.set('idleTimerLastActivity', idleTimerLastActivity);
         store.set('idleTimerLoggedOut', false);
       } else {
-        alert('Please disable "Private Mode", or upgrade to a modern browser. Or perhaps a dependent file missing. Please see: https://github.com/marcuswestin/store.js');
+        alert(opts.dialogPrivateMode);
       }
 
       activityDetector();
